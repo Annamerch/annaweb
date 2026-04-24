@@ -96,7 +96,7 @@ header {
 }
 .logo-sub {
   font-size: .7rem;
-  color: rgba(255,255,255,.5);
+  color: rgba(146, 33, 33, 0.5);
   letter-spacing: .18em;
   text-transform: uppercase;
   font-weight: 300;
@@ -105,7 +105,7 @@ header {
 
 .header-nav { display: flex; gap: 2rem; }
 .header-nav a {
-  color: rgba(255,255,255,.75);
+  color: rgba(187, 78, 78, 0.75);
   font-size: .85rem;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -201,7 +201,7 @@ header {
 
 .hero-sub {
   font-size: 1.05rem;
-  color: rgba(255,255,255,.6);
+  color: rgba(189, 87, 87, 0.6);
   max-width: 420px;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -267,7 +267,7 @@ header {
 }
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 50px rgba(18,19,31,.18);
+  box-shadow: 0 16px 50px rgba(139, 16, 0, 0.18);
   border-color: var(--gold);
 }
 
@@ -346,7 +346,7 @@ header {
 .color-dot {
   width: 14px; height: 14px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0,0,0,.15);
+  border: 1.5px solid rgba(197, 22, 22, 0.15);
   display: inline-block;
   title: attr(data-color);
 }
@@ -362,7 +362,7 @@ header {
   color: var(--white);
   margin-bottom: .8rem;
 }
-.contact-inner p { color: rgba(255,255,255,.6); font-size: 1.05rem; }
+.contact-inner p { color: rgba(209, 37, 37, 0.6); font-size: 1.05rem; }
 .contact-inner a { color: var(--gold); }
 .contact-inner a:hover { color: var(--gold-light); }
 
@@ -372,7 +372,7 @@ footer {
   text-align: center;
   padding: 1.5rem;
   font-size: .78rem;
-  color: rgba(255,255,255,.35);
+  color: rgba(196, 34, 34, 0.35);
   letter-spacing: .06em;
 }
 
@@ -552,7 +552,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 .spinner {
   width: 18px; height: 18px;
-  border: 2.5px solid rgba(255,255,255,.3);
+  border: 2.5px solid rgba(172, 88, 88, 0.3);
   border-top-color: var(--white);
   border-radius: 50%;
   animation: spin .7s linear infinite;
