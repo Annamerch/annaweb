@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. Anna Merch Shop</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- =====================================================================
+       PAYPAL SDK – Trage deine echte Client-ID unten ein (siehe Anleitung)
+       ===================================================================== -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR" defer></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════  HEADER  ═══════════════════════════ -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-main">St. Anna</span>
+        <span class="logo-sub">Merch Shop</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#products">Produkte</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </div>
+    <div class="header-marquee">
+      <div class="marquee-track">
+        <span>Schulkollektion 2024/25 &nbsp;·&nbsp; Limitiert &nbsp;·&nbsp; Nur solange der Vorrat reicht &nbsp;·&nbsp; Schulkollektion 2024/25 &nbsp;·&nbsp; Limitiert &nbsp;·&nbsp; Nur solange der Vorrat reicht &nbsp;·&nbsp; Schulkollektion 2024/25 &nbsp;·&nbsp; Limitiert &nbsp;·&nbsp; Nur solange der Vorrat reicht &nbsp;·&nbsp;</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════  HERO  ══════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-kicker">Exklusiv für Schülerinnen &amp; Schüler</p>
+      <h1 class="hero-title">Dein<br /><em>Style.</em><br />Deine Schule.</h1>
+      <p class="hero-sub">Offizieller Merch des St.-Anna-Gymnasiums – nachhaltig, modern, einzigartig.</p>
+      <a href="#products" class="btn-primary">Jetzt entdecken ↓</a>
+    </div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 120 120" width="160" height="160">
+        <defs>
+          <path id="circlePath" d="M 60,60 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"/>
+        </defs>
+        <text font-size="11.2" fill="var(--gold)" font-family="'DM Sans', sans-serif" letter-spacing="2.5" font-weight="600">
+          <textPath href="#circlePath">ST. ANNA GYMNASIUM · AUGSBURG · 2024 ·</textPath>
+        </text>
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="var(--gold)" font-family="'Bebas Neue', sans-serif">STA</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════  PRODUCTS GRID  ════════════════════ -->
+  <section id="products" class="products-section">
+    <div class="section-header">
+      <h2>Kollektion</h2>
+      <p>Klicke auf ein Produkt, um es zu bestellen.</p>
+    </div>
+    <div class="products-grid" id="productsGrid">
+      <!-- Filled dynamically via script.js -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════  CONTACT  ══════════════════════════ -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <h2>Fragen?</h2>
+      <p>Schreib uns gerne an<br />
+        <a href="mailto:st.anna.merch@protonmail.com">st.anna.merch@protonmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════  FOOTER  ═══════════════════════════ -->
+  <footer>
+    <p>© 2025 St.-Anna-Gymnasium Augsburg &nbsp;·&nbsp; Kein kommerzieller Anbieter &nbsp;·&nbsp; Schülerprojekt</p>
+  </footer>
+
+  <!-- ═══════════════════════════  ORDER MODAL  ══════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Schließen">✕</button>
+
+      <!-- Product Preview -->
+      <div class="modal-product-preview">
+        <img id="modalImg" src="" alt="" />
+        <div>
+          <p class="modal-product-label">Deine Auswahl</p>
+          <h3 id="modalTitle" class="modal-product-name">—</h3>
+          <p class="modal-product-price" id="modalPrice">—</p>
+        </div>
+      </div>
+
+      <!-- Order Form -->
+      <form id="orderForm" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="fieldSize">Größe *</label>
+            <select id="fieldSize" name="size" required>
+              <option value="">– bitte wählen –</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fieldColor">Farbe *</label>
+            <select id="fieldColor" name="color" required>
+              <option value="">– bitte wählen –</option>
+              <!-- Colors are injected dynamically per product -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fieldGender">Geschlecht *</label>
+            <select id="fieldGender" name="gender" required>
+              <option value="">– bitte wählen –</option>
+              <option value="Männlich">Männlich (M)</option>
+              <option value="Weiblich">Weiblich (W)</option>
+              <option value="Divers">Divers (D)</option>
+            </select>
+          </div>
+
+          <div class="form-group form-group--wide">
+            <label>Klasse *</label>
+            <div class="class-row">
+              <select id="fieldClassLevel" name="classLevel" required>
+                <option value="">Stufe</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="EF">EF</option>
+                <option value="Q1">Q1</option>
+                <option value="Q2">Q2</option>
+              </select>
+              <select id="fieldClassLetter" name="classLetter" required>
+                <option value="">Buchstabe</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+                <option value="d">d</option>
+                <option value="e">e</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group form-group--wide">
+            <label for="fieldName">Vollständiger Name *</label>
+            <input type="text" id="fieldName" name="name" placeholder="Vorname Nachname" required />
+          </div>
+
+          <div class="form-group form-group--wide">
+            <label for="fieldEmail">E-Mail-Adresse *</label>
+            <input type="email" id="fieldEmail" name="email" placeholder="deine@email.de" required />
+          </div>
+
+          <div class="form-group form-group--wide">
+            <label for="fieldNote">Anmerkung (optional)</label>
+            <textarea id="fieldNote" name="note" rows="2" placeholder="z.B. besondere Wünsche"></textarea>
+          </div>
+
+        </div><!-- /form-grid -->
+
+        <!-- Error message -->
+        <p class="form-error" id="formError" aria-live="polite"></p>
+
+        <!-- PayPal Button Container -->
+        <div class="paypal-section">
+          <p class="paypal-label">Zahlung via PayPal</p>
+          <div id="paypal-button-container">
+            <!-- PayPal Buttons werden hier geladen -->
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="submitLabel">Bestellung absenden</span>
+          <span id="submitSpinner" class="spinner" hidden></span>
+        </button>
+
+      </form><!-- /orderForm -->
+
+      <!-- Success Message -->
+      <div class="modal-success" id="modalSuccess" hidden>
+        <div class="success-icon">✓</div>
+        <h3>Bestellung eingegangen!</h3>
+        <p>Du erhältst in Kürze eine Bestätigungsmail. Bitte überprüfe auch deinen Spam-Ordner.</p>
+        <p class="success-note">Bei Fragen: <a href="mailto:st.anna.merch@protonmail.com">st.anna.merch@protonmail.com</a></p>
+        <button class="btn-primary" id="successClose">Zurück zum Shop</button>
+      </div>
+
+    </div><!-- /modal -->
+  </div><!-- /modal-overlay -->
+
+  <script src="script.js"></script>
+</body>
+</html>
