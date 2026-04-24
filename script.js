@@ -6,10 +6,10 @@
    ① EMAILJS KONFIGURATION
    Trage hier deine Keys aus https://dashboard.emailjs.com ein:
    ───────────────────────────────────────────────────────────────────── */
-const EMAILJS_PUBLIC_KEY    = "Dud4-yGPgxrJfb0ny";        // Account → API Keys
-const EMAILJS_SERVICE_ID    = "service_9qtdftz";       // Email Services → Service ID
-const EMAILJS_ADMIN_TPL_ID  = "template_8qh2y65";  // Template für Bestelleingang
-const EMAILJS_USER_TPL_ID   = "template_giifnmo";   // Template für Bestätigungsmail
+const EMAILJS_PUBLIC_KEY    = "DEIN_PUBLIC_KEY";        // Account → API Keys
+const EMAILJS_SERVICE_ID    = "DEINE_SERVICE_ID";       // Email Services → Service ID
+const EMAILJS_ADMIN_TPL_ID  = "DEINE_ADMIN_TEMPLATE_ID";  // Template für Bestelleingang
+const EMAILJS_USER_TPL_ID   = "DEINE_USER_TEMPLATE_ID";   // Template für Bestätigungsmail
 
 /* ─────────────────────────────────────────────────────────────────────
    ② PRODUKTDATEN – hier kannst du alle Produkte einfach anpassen

@@ -6,16 +6,16 @@
 
 /* ── CSS VARIABLES ────────────────────────────────────────────────── */
 :root {
-  --annarot:    #ff0000;
-  --navy-mid:   #1c1e30;
-  --navy-light: #262840;
-  --gold:       #e8a020;
-  --gold-light: #f5c060;
-  --cream:      #f5f1eb;
-  --cream-dark: #e8e3d8;
+  --navy:       #ffffff;
+  --navy-mid:   #691c1c;
+  --navy-light: #8a422c;
+  --gold:       #ff0000;
+  --gold-light: #f33d05;
+  --cream:      #a74949;
+  --cream-dark: #c97070;
   --white:      #ffffff;
-  --text:       #1a1b2e;
-  --muted:      #7a7a8e;
+  --text:       #742c2c;
+  --muted:      #942222;
 
   --radius:     6px;
   --radius-lg:  14px;
@@ -75,7 +75,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  box-shadow: 0 2px 20px rgba(184, 16, 16, 0.3);
 }
 
 .header-inner {
@@ -380,7 +380,7 @@ footer {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12,13,25,.75);
+  background: rgba(109, 7, 21, 0.75);
   backdrop-filter: blur(6px);
   z-index: 999;
   display: flex;
@@ -494,7 +494,7 @@ input, select, textarea {
 }
 input:focus, select:focus, textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(232,160,32,.15);
+  box-shadow: 0 0 0 3px rgba(199, 65, 12, 0.15);
 }
 textarea { resize: vertical; min-height: 60px; }
 
