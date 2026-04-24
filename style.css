@@ -6,21 +6,21 @@
 
 /* ── CSS VARIABLES ────────────────────────────────────────────────── */
 :root {
-  --navy:       #e59393;
-  --navy-mid:   #691c1c;
-  --navy-light: #8a422c;
-  --gold:       #ff0000;
-  --gold-light: #f33d05;
-  --cream:      #a74949;
-  --cream-dark: #c97070;
-  --white:      #d13e3e;
-  --text:       #742c2c;
-  --muted:      #942222;
+  --navy:       #fce7e7;
+  --navy-mid:   #f34949;
+  --navy-light: #f8aaaa;
+  --gold:       #fd0000;
+  --gold-light: #d44013;
+  --cream:      #a10f0f;
+  --cream-dark: #885252;
+  --white:      #f58b8b;
+  --text:       #000000;
+  --muted:      #000000;
 
   --radius:     6px;
   --radius-lg:  14px;
-  --shadow:     0 8px 40px rgba(18,19,31,.18);
-  --shadow-card: 0 4px 24px rgba(18,19,31,.12);
+  --shadow:     0 8px 40px rgba(31, 18, 18, 0.18);
+  --shadow-card: 0 4px 24px rgba(31, 18, 18, 0.12);
 
   --transition: .25s cubic-bezier(.4,0,.2,1);
 }
@@ -75,7 +75,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 20px rgba(184, 16, 16, 0.3);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-inner {
@@ -96,7 +96,7 @@ header {
 }
 .logo-sub {
   font-size: .7rem;
-  color: rgba(146, 33, 33, 0.5);
+  color: rgba(151, 5, 5, 0.5);
   letter-spacing: .18em;
   text-transform: uppercase;
   font-weight: 300;
@@ -105,7 +105,7 @@ header {
 
 .header-nav { display: flex; gap: 2rem; }
 .header-nav a {
-  color: rgba(187, 78, 78, 0.75);
+  color: rgba(197, 111, 111, 0.75);
   font-size: .85rem;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -157,7 +157,7 @@ header {
   position: absolute;
   width: 600px; height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,160,32,.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(243, 20, 20, 0.07) 0%, transparent 70%);
   top: -100px; right: -100px;
   pointer-events: none;
 }
@@ -201,7 +201,7 @@ header {
 
 .hero-sub {
   font-size: 1.05rem;
-  color: rgba(189, 87, 87, 0.6);
+  color: rgba(94, 2, 2, 0.6);
   max-width: 420px;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -267,7 +267,7 @@ header {
 }
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 50px rgba(139, 16, 0, 0.18);
+  box-shadow: 0 16px 50px rgba(185, 25, 4, 0.18);
   border-color: var(--gold);
 }
 
@@ -362,7 +362,7 @@ header {
   color: var(--white);
   margin-bottom: .8rem;
 }
-.contact-inner p { color: rgba(209, 37, 37, 0.6); font-size: 1.05rem; }
+.contact-inner p { color: rgba(22, 0, 0, 0.6); font-size: 1.05rem; }
 .contact-inner a { color: var(--gold); }
 .contact-inner a:hover { color: var(--gold-light); }
 
@@ -372,7 +372,7 @@ footer {
   text-align: center;
   padding: 1.5rem;
   font-size: .78rem;
-  color: rgba(196, 34, 34, 0.35);
+  color: rgba(107, 0, 0, 0.35);
   letter-spacing: .06em;
 }
 
@@ -380,7 +380,7 @@ footer {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(109, 7, 21, 0.75);
+  background: rgba(88, 14, 24, 0.75);
   backdrop-filter: blur(6px);
   z-index: 999;
   display: flex;
@@ -503,7 +503,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 /* ── Error ────────────────────────────────────────────────────────── */
 .form-error {
-  color: #c0392b;
+  color: #ffffff;
   font-size: .82rem;
   min-height: 1.2em;
   margin: .6rem 0;
@@ -552,7 +552,7 @@ textarea { resize: vertical; min-height: 60px; }
 
 .spinner {
   width: 18px; height: 18px;
-  border: 2.5px solid rgba(172, 88, 88, 0.3);
+  border: 2.5px solid rgba(184, 48, 48, 0.3);
   border-top-color: var(--white);
   border-radius: 50%;
   animation: spin .7s linear infinite;
