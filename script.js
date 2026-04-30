@@ -4,86 +4,60 @@
 
 /* ─────────────────────────────────────────────────────────────────────
    ① EMAILJS KONFIGURATION
-   Trage hier deine Keys aus https://dashboard.emailjs.com ein:
+   Keys aus https://dashboard.emailjs.com
    ───────────────────────────────────────────────────────────────────── */
-const EMAILJS_PUBLIC_KEY    = "Dud4-yGPgxrJfb0ny";        // Account → API Keys
-const EMAILJS_SERVICE_ID    = "service_9qtdftz";       // Email Services → Service ID
-const EMAILJS_ADMIN_TPL_ID  = "template_8qh2y65";  // Template für Bestelleingang
-const EMAILJS_USER_TPL_ID   = "template_giifnmo";   // Template für Bestätigungsmail
+const EMAILJS_PUBLIC_KEY   = "Dud4-yGPgxrJfb0ny";
+const EMAILJS_SERVICE_ID   = "service_9qtdftz";
+const EMAILJS_ADMIN_TPL_ID = "template_8qh2y65";  // Bestelleingang an Shop
+const EMAILJS_USER_TPL_ID  = "template_giifnmo";  // Bestätigung an Käufer
 
 /* ─────────────────────────────────────────────────────────────────────
-   ② PRODUKTDATEN – hier kannst du alle Produkte einfach anpassen
-   Felder:
-     id        – eindeutige ID (Zahl)
-     name      – Produktname
-     price     – Preis als String, z.B. "24,99 €"
-     priceNum  – Preis als Zahl für PayPal, z.B. 24.99
-     desc      – kurze Beschreibung
-     badge     – optionaler Aufkleber (z.B. "NEU"), null = kein Badge
-     img       – Pfad zum Produktbild (relativ zu index.html)
-     colors    – Array der verfügbaren Farben
+   ② PRODUKTDATEN
+   colors: Array aus { hex, name } – hex für den Farbkreis,
+                                     name für E-Mail / Bestellung
    ───────────────────────────────────────────────────────────────────── */
 const products = [
   {
     id: 1,
-    name: "Classic Hoodie",
-    price: "32,99 €",
-    priceNum: 32.99,
-    desc: "Unser Hoodie-Klassiker aus 80 % Baumwolle. Weich, warm und zeitlos.",
-    badge: "Bestseller",
-    img: "img/hoodie.jpg",        // ← Bild ersetzen
-    colors: ["#1a1b2e", "#ffffff", "#8b0000"],
+    name: "Polo Shirt",
+    price: "24,99 €",
+    desc: "Unser in der EU gefertigter Polo-Klassiker aus 100 % Baumwolle.",
+    badge: "First edition",
+    img: "polo.jpeg",
+    colors: [
+      { hex: "#000670", name: "Blau" },
+      { hex: "#ffffff", name: "Weiß" },
+      { hex: "#000000", name: "Schwarz" },
+    ],
   },
   {
     id: 2,
-    name: "T-Shirt Basic",
-    price: "18,99 €",
-    priceNum: 18.99,
-    desc: "Leichtes 100 % Bio-Baumwoll-Shirt für jeden Tag.",
+    name: "T-Shirt",
+    price: "19,99 €",
+    desc: "Leichtes 100 % Baumwoll-Shirt für jeden Tag.",
     badge: "NEU",
-    img: "img/tshirt.jpg",
-    colors: ["#1a1b2e", "#e8a020", "#ffffff"],
+    img: "tshirt.jpeg",
+    colors: [
+      { hex: "#000564", name: "Blau" },
+      { hex: "#ffffff", name: "Weiß" },
+      { hex: "#000000", name: "Schwarz" },
+    ],
   },
+
+  /*
   {
     id: 3,
     name: "Snapback Cap",
     price: "19,99 €",
-    priceNum: 19.99,
     desc: "Strukturierte 6-Panel-Cap mit gesticktem St.-Anna-Logo.",
     badge: null,
     img: "img/cap.jpg",
-    colors: ["#1a1b2e", "#555566"],
+    colors: [
+      { hex: "#1a1b2e", name: "Dunkelblau" },
+      { hex: "#555566", name: "Grau" },
+    ],
   },
-  {
-    id: 4,
-    name: "Trainingsjacke",
-    price: "44,99 €",
-    priceNum: 44.99,
-    desc: "Leichte Zip-Through-Jacke, ideal für Sport und Freizeit.",
-    badge: "Limitiert",
-    img: "img/jacket.jpg",
-    colors: ["#1a1b2e", "#2e4a6e"],
-  },
-  {
-    id: 5,
-    name: "Tote Bag",
-    price: "12,99 €",
-    priceNum: 12.99,
-    desc: "Robuste Canvas-Tasche – ideal für Bücher und Sportkram.",
-    badge: null,
-    img: "img/totebag.jpg",
-    colors: ["#c8b89a", "#1a1b2e"],
-  },
-  {
-    id: 6,
-    name: "Bucket Hat",
-    price: "16,99 €",
-    priceNum: 16.99,
-    desc: "Der angesagte Fischerhut mit Schuld-Logo-Stickerei.",
-    badge: "NEU",
-    img: "img/bucket.jpg",
-    colors: ["#e8e3d8", "#1a1b2e"],
-  },
+  */
 ];
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -99,8 +73,10 @@ function renderProducts() {
   grid.innerHTML = "";
 
   products.forEach((p, idx) => {
+    // Farbkreise auf der Karte zeigen den Hex-Wert als Hintergrund
     const colorDots = p.colors
-      .map(c => `<span class="color-dot" style="background:${c}" title="${c}"></span>`)
+      .map(c => `<span class="color-dot" style="background:${c.hex}" title="${c.name}"
+                   ${c.hex === "#ffffff" ? 'style="background:#fff;border-color:#bbb"' : ""}></span>`)
       .join("");
 
     const badgeHTML = p.badge
@@ -132,48 +108,85 @@ function renderProducts() {
       </div>`;
 
     card.addEventListener("click", () => openModal(p));
-    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openModal(p); });
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") openModal(p);
+    });
 
     grid.appendChild(card);
   });
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   ⑤ MODAL – ÖFFNEN / SCHLIESSEN
+   ⑤ FARB-PICKER (visuell)
+   ───────────────────────────────────────────────────────────────────── */
+function buildColorPicker(colors) {
+  const row = document.getElementById("colorSwatchRow");
+  const hidden = document.getElementById("fieldColor");
+  const label = document.getElementById("colorSelectedLabel");
+
+  row.innerHTML = "";
+  hidden.value = "";
+  label.textContent = "";
+
+  colors.forEach(c => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "color-swatch";
+    btn.setAttribute("aria-label", c.name);
+    btn.setAttribute("title", c.name);
+    btn.style.setProperty("--swatch-color", c.hex);
+    // White swatch needs a border so it's visible on white background
+    if (c.hex === "#ffffff" || c.hex === "#fff") {
+      btn.classList.add("color-swatch--light");
+    }
+
+    btn.addEventListener("click", () => {
+      // Deselect all
+      row.querySelectorAll(".color-swatch").forEach(b => b.classList.remove("is-selected"));
+      // Select this one
+      btn.classList.add("is-selected");
+      hidden.value = c.name;
+      label.textContent = c.name;
+    });
+
+    row.appendChild(btn);
+  });
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ⑥ MODAL – ÖFFNEN / SCHLIESSEN
    ───────────────────────────────────────────────────────────────────── */
 function openModal(product) {
   currentProduct = product;
 
   // Produktvorschau befüllen
-  document.getElementById("modalImg").src  = product.img;
-  document.getElementById("modalImg").alt  = product.name;
-  document.getElementById("modalImg").onerror = function () {
+  const img = document.getElementById("modalImg");
+  img.src = product.img;
+  img.alt = product.name;
+  img.onerror = function () {
     this.src = `https://placehold.co/100x100/12131f/e8a020?text=${encodeURIComponent(product.name)}`;
   };
   document.getElementById("modalTitle").textContent = product.name;
   document.getElementById("modalPrice").textContent  = product.price;
 
-  // Farben befüllen
-  const colorSelect = document.getElementById("fieldColor");
-  colorSelect.innerHTML = `<option value="">– bitte wählen –</option>`;
-  product.colors.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    colorSelect.appendChild(opt);
-  });
+  // Farbwähler aufbauen
+  buildColorPicker(product.colors);
 
   // Formular & Erfolg zurücksetzen
   document.getElementById("orderForm").reset();
+  // reset() clears the hidden input too – colour label stays though, clear manually
+  document.getElementById("fieldColor").value = "";
+  document.getElementById("colorSelectedLabel").textContent = "";
+  document.getElementById("colorSwatchRow")
+    .querySelectorAll(".color-swatch")
+    .forEach(b => b.classList.remove("is-selected"));
+
   document.getElementById("orderForm").hidden = false;
   document.getElementById("modalSuccess").hidden = true;
   document.getElementById("formError").textContent = "";
   document.getElementById("submitLabel").textContent = "Bestellung absenden";
   document.getElementById("submitSpinner").hidden = true;
   document.getElementById("submitBtn").disabled = false;
-
-  // PayPal Button initialisieren
-  initPayPal(product);
 
   // Modal einblenden
   document.getElementById("modalOverlay").classList.add("active");
@@ -199,7 +212,7 @@ document.addEventListener("keydown", e => {
 document.getElementById("successClose").addEventListener("click", closeModal);
 
 /* ─────────────────────────────────────────────────────────────────────
-   ⑥ FORMULAR-VALIDIERUNG
+   ⑦ FORMULAR-VALIDIERUNG
    ───────────────────────────────────────────────────────────────────── */
 function validateForm() {
   const fields = [
@@ -207,8 +220,8 @@ function validateForm() {
     { id: "fieldColor",       label: "Farbe" },
     { id: "fieldGender",      label: "Geschlecht" },
     { id: "fieldClassLevel",  label: "Klassenstufe" },
-    { id: "fieldClassLetter", label: "Klassenbuchtabe" },
-    { id: "fieldName",        label: "Voller Name" },
+    { id: "fieldClassLetter", label: "Klassenbuchstabe" },
+    { id: "fieldName",        label: "Vollständiger Name" },
     { id: "fieldEmail",       label: "E-Mail" },
   ];
 
@@ -226,7 +239,7 @@ function validateForm() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   ⑦ BESTELLUNG ABSENDEN (EmailJS)
+   ⑧ BESTELLUNG ABSENDEN (EmailJS – 2 Mails)
    ───────────────────────────────────────────────────────────────────── */
 document.getElementById("orderForm").addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -260,18 +273,17 @@ document.getElementById("orderForm").addEventListener("submit", async function (
                       day: "2-digit", month: "2-digit", year: "numeric",
                       hour: "2-digit", minute: "2-digit",
                     }),
-    to_email:       "st.anna.merch@protonmail.com",
-    reply_to:       document.getElementById("fieldEmail").value.trim(),
+    reply_to: document.getElementById("fieldEmail").value.trim(),
   };
 
   try {
     // ── Mail 1: Bestelleingang an den Shop ──────────────────────────
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_ADMIN_TPL_ID, {
       ...orderData,
-      to_email: "st.anna.merch@protonmail.com",
+      to_email: "bestellung@merch.st-anna.de",
     });
 
-    // ── Mail 2: Bestätigungsmail an den Kunden ──────────────────────
+    // ── Mail 2: Bestätigungsmail an den Käufer ──────────────────────
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_USER_TPL_ID, {
       ...orderData,
       to_email: orderData.customer_email,
@@ -284,7 +296,7 @@ document.getElementById("orderForm").addEventListener("submit", async function (
   } catch (err) {
     console.error("EmailJS Fehler:", err);
     document.getElementById("formError").textContent =
-      "Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe uns direkt an st.anna.merch@protonmail.com";
+      "Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe uns direkt an bestellung@merch.st-anna.de";
     document.getElementById("submitLabel").textContent = "Bestellung absenden";
     document.getElementById("submitSpinner").hidden = true;
     document.getElementById("submitBtn").disabled = false;
@@ -292,68 +304,9 @@ document.getElementById("orderForm").addEventListener("submit", async function (
 });
 
 /* ─────────────────────────────────────────────────────────────────────
-   ⑧ PAYPAL INTEGRATION
-   Trage deine echte Client-ID im <script>-Tag in index.html ein.
-   ───────────────────────────────────────────────────────────────────── */
-function initPayPal(product) {
-  const container = document.getElementById("paypal-button-container");
-  container.innerHTML = ""; // alten Button entfernen
-
-  // Warte bis PayPal SDK geladen ist
-  if (typeof paypal === "undefined") {
-    container.innerHTML =
-      `<p style="font-size:.8rem;color:#999;text-align:center">
-        PayPal wird geladen… (Client-ID in index.html eintragen)
-      </p>`;
-    return;
-  }
-
-  paypal.Buttons({
-    style: {
-      layout: "horizontal",
-      color:  "gold",
-      shape:  "rect",
-      label:  "buynow",
-      tagline: false,
-    },
-
-    /* ── Bestellung erstellen ─────────────────────────────────────── */
-    createOrder: function (data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          description: product.name,
-          amount: {
-            currency_code: "EUR",
-            value: product.priceNum.toFixed(2),
-          },
-        }],
-      });
-    },
-
-    /* ── Zahlung genehmigt ─────────────────────────────────────────── */
-    onApprove: function (data, actions) {
-      return actions.order.capture().then(function (details) {
-        alert(`✓ Zahlung erfolgreich! Transaktions-ID: ${details.id}`);
-        // Optional: hier noch eine eigene Logik nach erfolgreicher Zahlung
-      });
-    },
-
-    /* ── Fehler ────────────────────────────────────────────────────── */
-    onError: function (err) {
-      console.error("PayPal Fehler:", err);
-      document.getElementById("formError").textContent =
-        "PayPal-Zahlung fehlgeschlagen. Bitte erneut versuchen.";
-    },
-  }).render("#paypal-button-container");
-}
-
-/* ─────────────────────────────────────────────────────────────────────
    ⑨ APP STARTEN
    ───────────────────────────────────────────────────────────────────── */
 (function init() {
-  // EmailJS initialisieren
   emailjs.init(EMAILJS_PUBLIC_KEY);
-
-  // Produkte rendern
   renderProducts();
 })();
