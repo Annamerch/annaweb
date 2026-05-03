@@ -357,7 +357,7 @@ header {
 }
 .contact-inner h2 {
   font-size: 3.5rem;
-  color: var(--white);
+  color: var(--navy);
   margin-bottom: .8rem;
 }
 .contact-inner p { color: rgba(22, 0, 0, 0.6); font-size: 1.05rem; }
