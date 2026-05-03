@@ -357,12 +357,12 @@ header {
 }
 .contact-inner h2 {
   font-size: 3.5rem;
-  color: var(--text);
+  color: var(--white);
   margin-bottom: .8rem;
 }
 .contact-inner p { color: rgba(22, 0, 0, 0.6); font-size: 1.05rem; }
-.contact-inner a { color: var(--gold); }
-.contact-inner a:hover { color: var(--gold-light); }
+.contact-inner a { color: var(--cream); }
+.contact-inner a:hover { color: var(--cream-dark); }
 
 /* ═══════════════════════════  FOOTER  ════════════════════════════════ */
 footer {
