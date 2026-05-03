@@ -7,7 +7,7 @@
    Keys aus https://dashboard.emailjs.com
    ───────────────────────────────────────────────────────────────────── */
 const EMAILJS_PUBLIC_KEY   = "Dud4-yGPgxrJfb0ny";
-const EMAILJS_SERVICE_ID   = "service_9qtdftz";
+const EMAILJS_SERVICE_ID   = "service_n850bzk";
 const EMAILJS_ADMIN_TPL_ID = "template_8qh2y65";  // Bestelleingang an Shop
 const EMAILJS_USER_TPL_ID  = "template_giifnmo";  // Bestätigung an Käufer
 
