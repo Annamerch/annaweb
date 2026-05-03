@@ -360,7 +360,7 @@ header {
   color: var(--white);
   margin-bottom: .8rem;
 }
-.contact-inner p { color: rgba(22, 0, 0, 0.6); font-size: 1.05rem; }
+.contact-inner p { color: rgba(22, 0, 0, 0.6); font-size: 1.04rem; }
 .contact-inner a { color: var(--cream); }
 .contact-inner a:hover { color: var(--cream-dark); }
 
